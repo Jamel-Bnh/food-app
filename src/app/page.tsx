@@ -1,9 +1,15 @@
+import Featured from '@/components/Featured'
+import Slider from '@/components/Slider'
+import Offer from '@/components/Offer'
 import Image from 'next/image'
 
 export default function Home() {
   return (
     <main>
-      <h1>Welcome to Food App</h1>
+      <Slider />
+      <Featured />
+      <Offer />
+
     </main>
   )
 }
