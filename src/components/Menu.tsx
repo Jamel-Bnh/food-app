@@ -8,59 +8,74 @@ import CartIcon from "./CartIcon";
 const links = [
   { id: 1, title: "Homepage", url: "/" },
   { id: 2, title: "Menu", url: "/menu" },
-  { id: 3, title: "Working Hours", url: "/" }, // ← change to real URL later
-  { id: 4, title: "Contact", url: "/" },       // ← same
+  { id: 3, title: "Working Hours", url: "/" },
+  { id: 4, title: "Contact", url: "/" },
 ];
 
 const Menu = () => {
   const [open, setOpen] = useState(false);
 
-  // TEMP user – replace with real auth later (e.g. useSession from next-auth)
+  // TEMPORARY
   const user = false;
-
   return (
-    <div className="relative z-50">
-      <button
-        aria-label={open ? "Close menu" : "Open menu"}
-        onClick={() => setOpen(!open)}
-        className="focus:outline-none"
-      >
+    <div>
+      {/* LONG WAY */}
+      {/* {!open ? (
         <Image
-          src={open ? "/close.png" : "/open.png"}
-          alt={open ? "Close menu" : "Open menu"}
-          width={28}
-          height={28}
-          className="cursor-pointer"
-          priority // good for above-the-fold icon
+          src="/open.png"
+          alt=""
+          width={20}
+          height={20}
+          onClick={() => setOpen(true)}
         />
-      </button>
-
+      ) : (
+        <Image
+          src="/close.png"
+          alt=""
+          width={20}
+          height={20}
+          onClick={() => setOpen(false)}
+        />
+      )} */}
+      
+      {/* SHORTCUT */}
+      <Image
+        src={open ? "/close.png" : "/open.png"}
+        alt=""
+        width={20}
+        height={20}
+        onClick={() => setOpen(!open)}
+        className="cursor-pointer"
+      />
       {open && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden">
-          <div className="bg-red-600 text-white absolute top-20 left-0 right-0 bottom-0 flex flex-col items-center justify-center gap-10 text-4xl font-medium">
-            {links.map((item) => (
-              <Link
-                key={item.id}
-                href={item.url}
-                onClick={() => setOpen(false)}
-                className="hover:text-red-200 transition"
-              >
-                {item.title}
-              </Link>
-            ))}
-
-            <Link
-              href={user ? "/orders" : "/login"}
-              onClick={() => setOpen(false)}
-              className="hover:text-red-200 transition"
-            >
-              {user ? "Orders" : "Login"}
+        <div className="bg-red-500 text-white absolute left-0 top-24 w-full h-[calc(100vh-6rem)] flex flex-col gap-8 items-center justify-center text-3xl z-10">
+          {links.map((item) => (
+            <Link href={item.url} key={item.id} onClick={() => setOpen(false)}>
+              {item.title}
             </Link>
+          ))}
 
-            <Link href="/cart" onClick={() => setOpen(false)}>
-              <CartIcon /> {/* CartIcon already has Link inside – but ok to nest if needed */}
+          {/* LONG WAY */}
+          {/* {!user ? (
+            <Link href="/login" onClick={() => setOpen(false)}>
+              Login
             </Link>
-          </div>
+          ) : (
+            <Link href="/orders" onClick={() => setOpen(false)}>
+              Orders
+            </Link>
+          )} */}
+
+          {/* SHORTCUT */}
+          <Link
+            href={user ? "/orders" : "login"}
+            onClick={() => setOpen(false)}
+          >
+            {user ? "Orders" : "Login"}
+          </Link>
+          <Link href="/cart" onClick={() => setOpen(false)}>
+            <CartIcon />
+          </Link>
         </div>
       )}
     </div>
