@@ -8,6 +8,7 @@ export type MenuType = {
 }[];
 
 export type ProductType = {
+  [x: string]: any;
   id: string;
   title: string;
   desc?: string;
