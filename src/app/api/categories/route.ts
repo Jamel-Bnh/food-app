@@ -1,7 +1,7 @@
-import { PrismaClient } from "@prisma/client/extension";
+
+import { prisma } from "@/utils/connect";
 import { NextResponse } from "next/server"
 
-const prisma = new PrismaClient()
 
  export const GET = async () => {
    try{
